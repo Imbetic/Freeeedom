@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="stdaxf">
+      <UniqueIdentifier>{9985911f-13cf-48c1-bc5b-5514e5755ff3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateManager">
+      <UniqueIdentifier>{7d121a21-ddfb-4273-9929-2baa80c972da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AnimatedSprite">
+      <UniqueIdentifier>{8608c8e7-ce16-4391-9f77-401f92c900ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InputManager">
+      <UniqueIdentifier>{b4ff94bf-6e6c-47d2-937b-829896398679}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{c4bf9873-d474-4a4a-ae57-0fdf009572f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SpriteManager">
+      <UniqueIdentifier>{99b25cb5-fd45-4d1c-a732-17c7551350b1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>stdaxf</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="StateManager.cpp">
+      <Filter>StateManager</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedSprite.cpp">
+      <Filter>AnimatedSprite</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>InputManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteManager.cpp">
+      <Filter>SpriteManager</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>stdaxf</Filter>
+    </ClInclude>
+    <ClInclude Include="StateManager.h">
+      <Filter>StateManager</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h" />
+    <ClInclude Include="AnimatedSprite.h">
+      <Filter>AnimatedSprite</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>InputManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteManager.h">
+      <Filter>SpriteManager</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
