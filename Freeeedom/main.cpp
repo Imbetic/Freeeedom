@@ -6,24 +6,13 @@
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+	Engine m_engine;
 
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
+	if(m_engine.Initialize()){
+		m_engine.Run();
+	}
+	m_engine.Cleanup();
 
-        window.clear();
-        window.draw(shape);
-        window.display();
-    }
-
-    return 0;
+	return 0;
 }
 
