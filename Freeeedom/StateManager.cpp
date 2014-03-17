@@ -6,7 +6,6 @@
 StateManager::StateManager()
 {
 	m_pCurrentState = nullptr;
-
 }
 
 StateManager::~StateManager()
@@ -42,6 +41,7 @@ void StateManager::Update(float p_fDeltatime)
 	{
 		return;
 	}
+	m_pCurrentState->Update(p_fDeltatime);
 }
 
 void StateManager::Draw()

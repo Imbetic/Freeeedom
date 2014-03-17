@@ -19,6 +19,12 @@
     <Filter Include="SpriteManager">
       <UniqueIdentifier>{99b25cb5-fd45-4d1c-a732-17c7551350b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{1294ff71-b348-4745-be7a-5fea777ad417}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjectManager">
+      <UniqueIdentifier>{25dfff53-a730-458c-a315-a44812ea3d36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -40,6 +46,17 @@
     <ClCompile Include="SpriteManager.cpp">
       <Filter>SpriteManager</Filter>
     </ClCompile>
+    <ClCompile Include="Konstrukten.cpp" />
+    <ClCompile Include="GameState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectManager.cpp">
+      <Filter>GameObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -48,7 +65,6 @@
     <ClInclude Include="StateManager.h">
       <Filter>StateManager</Filter>
     </ClInclude>
-    <ClInclude Include="State.h" />
     <ClInclude Include="AnimatedSprite.h">
       <Filter>AnimatedSprite</Filter>
     </ClInclude>
@@ -61,5 +77,19 @@
     <ClInclude Include="SpriteManager.h">
       <Filter>SpriteManager</Filter>
     </ClInclude>
+    <ClInclude Include="Konstrukten.h" />
+    <ClInclude Include="GameState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectManager.h">
+      <Filter>GameObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObject.h" />
   </ItemGroup>
 </Project>

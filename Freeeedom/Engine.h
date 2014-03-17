@@ -22,5 +22,6 @@ public:
 	sf::RenderWindow* m_window;
 	InputManager* m_inputmngr;
 
+	sf::View* m_view;
 };
 

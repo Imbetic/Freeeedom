@@ -20,7 +20,8 @@ InputManager::InputManager()
 
 void InputManager::UpdateEvents(sf::Event event)
 {
-
+	m_x = sf::Mouse::getPosition().x;
+	m_y = sf::Mouse::getPosition().x;
 	if (event.type == sf::Event::KeyPressed)
 	{
 		int index = event.key.code;
