@@ -22,12 +22,14 @@ bool Engine::Initialize()
 	m_inputmngr = new InputManager;
 	m_window = new sf::RenderWindow(sf::VideoMode(1280, 720), "The SHIT");
 	m_window->setView(*m_view);
+	m_window->setMouseCursorVisible(false);
 	m_statemanager.Attach(new GameState(this));
 	m_statemanager.SetState("GameState");
 	return true;
 }
 
-void Engine::Run(){
+void Engine::Run()
+{
 	while(m_running)
 	{
 		sf::Event event;
@@ -36,14 +38,16 @@ void Engine::Run(){
 			m_inputmngr->UpdateEvents(event);
 		}
 		UpdateDeltatime();
-		m_statemanager.Update(0.016f);
+		m_statemanager.Update(0.01f);
 		m_window->clear();
 		m_statemanager.Draw();
 		m_window->display();
 	}
 };
 
-void Engine::Cleanup(){
+
+void Engine::Cleanup()
+{
 	if(m_inputmngr!=nullptr){
 		delete m_inputmngr;
 		m_inputmngr = nullptr;
@@ -58,4 +62,7 @@ void Engine::Cleanup(){
 	}
 }
 
-void Engine::UpdateDeltatime(){};
+void Engine::UpdateDeltatime()
+{
+
+};

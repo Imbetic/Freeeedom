@@ -37,3 +37,8 @@ sf::Vector2f GameObject::GetAnchor()
 {
 	return m_cameraanchor;
 }
+
+sf::Vector2f GameObject::GetWeaponPosition()
+{
+	return m_weaponposition;
+};

@@ -42,6 +42,7 @@ using namespace std;
 
 
 #include "StateManager.h"
+#include "Types.h"
 #include "Engine.h"
 
 

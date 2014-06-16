@@ -2,6 +2,7 @@
 #include "GameObjectManager.h"
 #include "GameObject.h"
 #include "PlayerObject.h"
+#include "Wall.h"
 
 GameObjectManager::GameObjectManager(Engine* engine)
 {
@@ -11,58 +12,53 @@ GameObjectManager::GameObjectManager(Engine* engine)
 
 GameObjectManager::~GameObjectManager(void)
 {
+
 }
 
 bool GameObjectManager::Initialize()
 {
-	sf::RectangleShape* rectangle = new sf::RectangleShape; 
-	sf::RectangleShape* rect = new sf::RectangleShape; 
-		
-	rectangle->setSize(sf::Vector2f(20, 1000));
-	rectangle->setFillColor(sf::Color::Red);
-	rectangle->setPosition(sf::Vector2f(500, 500));
-	m_rectangles.push_back(rectangle);
-	rect->setSize(sf::Vector2f(1000, 20));
-	rect->setFillColor(sf::Color::Red);
-	rect->setPosition(sf::Vector2f(500, 500));
-	m_rectangles.push_back(rect);
-	m_gameobjects.push_back(new PlayerObject(m_engine->m_inputmngr, m_engine->m_window));
-	m_gameobjects.at(0)->Initialize();
+	m_walls.push_back(new Wall(sf::Vector2f(0,0), sf::Vector2f(500,50)));
+	m_walls.push_back(new Wall(sf::Vector2f(500,0), sf::Vector2f(50,500)));
+	m_walls.push_back(new Wall(sf::Vector2f(500,500), sf::Vector2f(100,200)));
+	m_walls.push_back(new Wall(sf::Vector2f(600,600), sf::Vector2f(100,200)));
+	m_walls.push_back(new Wall(sf::Vector2f(600,800), sf::Vector2f(200,100)));
+
+	m_player = new PlayerObject(m_engine->m_inputmngr, m_engine->m_window);
+	m_player->Initialize();
+	
 	return true;
 };
 
 void GameObjectManager::Update(float deltatime)
 {
-	m_engine->m_view->setCenter(m_gameobjects.at(0)->GetPosition());
-	m_engine->m_view->setRotation(m_gameobjects.at(0)->GetRotation() - 90);
-	m_engine->m_view->setCenter(m_gameobjects.at(0)->GetAnchor());
+	m_engine->m_view->setCenter(m_player->GetPosition());
+	m_engine->m_view->setRotation(m_player->GetRotation() - 90);
+	m_engine->m_view->setCenter(m_player->GetAnchor());
 	m_engine->m_window->setView(*m_engine->m_view);
-	for(int i = 0; i<m_gameobjects.size(); i++)
-	{
-		//SetPlayer
-		//SetVisible
-		//SetPositions
-		//SetCollisions
-		m_gameobjects.at(i)->Update(deltatime);
-		m_gameobjects.at(i)->WallCollision(m_rectangles);
 
-		if(m_gameobjects.at(i)->GetExistance() == false){
-			delete m_gameobjects.at(i);
-			//Erase them too
-		};
+	m_player->Update(deltatime);
+
+	for(int i = 0; i<m_walls.size(); i++)
+	{
+		m_walls.at(i)->Update(m_player);
 	}
+
+	
+
 };
 
 void GameObjectManager::Draw()
 {
-	for(int i = 0; i<m_gameobjects.size(); i++)
+	for(int i = 0; i<m_walls.size(); i++)
 	{
-		m_gameobjects.at(i)->Draw();
+		m_walls.at(i)->DrawShadows(m_engine->m_window);
 	}
-	for(int i = 0; i<m_rectangles.size(); i++)
+	for(int i = 0; i<m_walls.size(); i++)
 	{
-		m_engine->m_window->draw(*m_rectangles.at(i));
+		m_walls.at(i)->Draw(m_engine->m_window);
 	}
+
+	m_player->Draw();
 	
 };
 

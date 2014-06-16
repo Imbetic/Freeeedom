@@ -57,6 +57,8 @@
       <Filter>GameObjectManager</Filter>
     </ClCompile>
     <ClCompile Include="PlayerObject.cpp" />
+    <ClCompile Include="WeaponObject.cpp" />
+    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -91,5 +93,8 @@
       <Filter>GameObjectManager</Filter>
     </ClInclude>
     <ClInclude Include="PlayerObject.h" />
+    <ClInclude Include="WeaponObject.h" />
+    <ClInclude Include="Types.h" />
+    <ClInclude Include="Wall.h" />
   </ItemGroup>
 </Project>

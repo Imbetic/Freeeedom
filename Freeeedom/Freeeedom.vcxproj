@@ -91,6 +91,9 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Konstrukten.h" />
+    <ClInclude Include="Types.h" />
+    <ClInclude Include="Wall.h" />
+    <ClInclude Include="WeaponObject.h" />
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="SpriteManager.h" />
     <ClInclude Include="State.h" />
@@ -106,6 +109,8 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Konstrukten.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Wall.cpp" />
+    <ClCompile Include="WeaponObject.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
     <ClCompile Include="SpriteManager.cpp" />
     <ClCompile Include="StateManager.cpp" />
