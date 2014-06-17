@@ -3,6 +3,7 @@
 
 class PlayerObject;
 class InputManager;
+class Wall;
 
 class WeaponObject :
 	public GameObject
@@ -13,7 +14,7 @@ public:
 	
 	bool Initialize();
 	void Update(float deltatime);
-	void WallCollision(std::vector<sf::RectangleShape*> rectangles);
+	void WallCollision(std::vector<Wall*> rectangles);
 	void Hit(std::vector<sf::CircleShape*> circles);
 	void Draw();
 	void Load(bool loading);

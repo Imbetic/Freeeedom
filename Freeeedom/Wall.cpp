@@ -64,6 +64,11 @@ void Wall::DrawShadows(sf::RenderWindow* p_renderer)
 	}
 }
 
+sf::RectangleShape Wall::GetWall()
+{
+	return m_wall;
+}
+
 Wall::~Wall(void)
 {
 

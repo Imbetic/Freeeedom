@@ -2,6 +2,7 @@
 #include "PlayerObject.h"
 #include "InputManager.h"
 #include "WeaponObject.h"
+#include "Wall.h"
 #include <iostream>
 
 PlayerObject::PlayerObject(InputManager* p_input, sf::RenderWindow* window)
@@ -12,8 +13,8 @@ PlayerObject::PlayerObject(InputManager* p_input, sf::RenderWindow* window)
 
 bool PlayerObject::Initialize()
 {
-	m_acceleration = 0.2;
-	m_friction = 0.99;
+	m_acceleration = 1500;
+	m_friction = 10;
 	m_radius = 25;
 	m_position = sf::Vector2f(0, 100);
 	m_previousposition = m_position;
@@ -22,9 +23,10 @@ bool PlayerObject::Initialize()
 	m_body.setOrigin(m_radius, m_radius);
 	m_body.setFillColor(sf::Color::Black);
 	m_previousmouspos = 0;
-	m_rotationspeed = 3;
+	m_rotationspeed = 12;
 	m_viewdistance = 250;
-	for(int i = 0; i < 4; i++){
+	for(int i = 0; i < 4; i++)
+	{
 		m_numbercount[i]=i;
 	}
 	m_numbercount[5]=0;
@@ -43,11 +45,11 @@ void PlayerObject::Update(float deltatime)
 
 	if(m_input->IsDownK(sf::Keyboard::LShift)&&m_input->IsDownK(sf::Keyboard::W))
 	{
-		m_acceleration = 0.4;
+		m_acceleration = 3000;
 	}
-	else m_acceleration = 0.2;
+	else m_acceleration = 1500;
 
-	if(sqrt((m_velocity.x*m_velocity.x)+(m_velocity.y*m_velocity.y)) < 0.9) m_friction = 0.99;
+	if(sqrt((m_velocity.x*m_velocity.x)+(m_velocity.y*m_velocity.y)) < 0.9) m_friction = 10;
 
 	//float delta_X = m_position.x-sf::Mouse::getPosition(*m_window).x;
 	//float delta_Y = m_position.y-sf::Mouse::getPosition(*m_window).y;
@@ -131,9 +133,9 @@ void PlayerObject::Update(float deltatime)
 
 
 	m_velocity += sf::Vector2f(accX, accY);
-	m_position += m_velocity;
-	m_velocity.x*=m_friction;
-	m_velocity.y*=m_friction;
+	m_position += m_velocity * deltatime;
+	m_velocity.x-=m_velocity.x*m_friction*deltatime;
+	m_velocity.y-=m_velocity.y*m_friction*deltatime;
 	m_body.setRotation(m_rotation);
 	m_body.setPosition(m_position);
 
@@ -142,7 +144,7 @@ void PlayerObject::Update(float deltatime)
 		m_weapon->Initialize();
 		m_loading = true;
 	}
-	
+
 	if(m_loading)
 	{ 
 		//§§§m_weapon->Load(float deltatime)
@@ -160,8 +162,8 @@ void PlayerObject::Update(float deltatime)
 		m_weapon->Draw();
 		/*if(m_weapon->DoneSwinging())
 		{
-			m_weapon->Reset();
-			m_released = false;
+		m_weapon->Reset();
+		m_released = false;
 		}*/
 	}
 
@@ -190,121 +192,83 @@ void PlayerObject::Hit(std::vector<sf::CircleShape*> circles)
 	}
 };
 
-void PlayerObject::WallCollision(std::vector<sf::RectangleShape*> rectangles)
+void PlayerObject::WallCollision(std::vector<Wall*> rectangles)
 {
-	bool xcollision = false;
-	bool ycollision = false;
 	for(int i = 0; i<rectangles.size(); i++)
 	{
-		sf::Vector2f line[4];
 
-		if(rectangles.at(i)->getPointCount() == 4)
+		for(int j = 0; j < 4; j++)
 		{
-			for(int j = 0; j < 4; j++)
+			float dX = m_position.x - (rectangles.at(i)->GetWall().getPoint(j).x + rectangles.at(i)->GetWall().getPosition().x);
+			float dY = m_position.y - (rectangles.at(i)->GetWall().getPoint(j).y + rectangles.at(i)->GetWall().getPosition().y);
+			float dist = sqrt((dX*dX) + (dY*dY));
+			if(dist == 0) dist = 0.1;
+
+
+			if(dist<m_radius)
 			{
-				if(rectangles.at(i)->getRotation() == 0){
-					float dX = m_position.x - (rectangles.at(i)->getPoint(j).x + rectangles.at(i)->getPosition().x);
-					float dY = m_position.y - (rectangles.at(i)->getPoint(j).y + rectangles.at(i)->getPosition().x);
-					float dist = sqrt((dX*dX) + (dY*dY));
-					if(dist == 0) dist = 0.1;
-					if(dist<m_radius)
-					{
-						float overlapdist = m_radius - dist;
-						float x = overlapdist * dX /dist;
-						float y = overlapdist * dY /dist;
-						m_position += sf::Vector2f(x, y);
-						m_body.setPosition(m_position);
-						//if(sqrt((m_actualvelocity.x*m_actualvelocity.x) + (m_actualvelocity.y*m_actualvelocity.y)) > 0.2) std::cout << "FATAL COLLISION" << std::endl;
-						m_actualvelocity.x = 0;
-						m_actualvelocity.y = 0;
+				float overlapdist = m_radius - dist;
+				float x = overlapdist * dX /dist;
+				float y = overlapdist * dY /dist;
+				m_position += sf::Vector2f(x, y);
+				m_body.setPosition(m_position);
+			};
 
-					};
-
-				}
-
-				/*float deltaY = rectangles.at(i)->getPoint(j).y - rectangles.at(i)->getPoint(j+1).y;
-				float deltaX = rectangles.at(i)->getPoint(j).x - rectangles.at(i)->getPoint(j+1).x;
-				if(deltaX == 0 || deltaY == 0)
-				{
-				if(rectangles.at(i)->getGlobalBounds().intersects(m_body.getGlobalBounds()))
-				{
-				if(m_position.x < rectangles.at(i)->getPosition().x)
-				{
-				float overlapX = rectangles.at(i)->getPosition().x - m_position.x;
-				}
-				}
-				}
-				else
-				{
-				float k = deltaY/deltaX;
-				float m = rectangles.at(i)->getPoint(j).y - k*rectangles.at(i)->getPoint(j).x;
-				line[j] = sf::Vector2f(k ,m);
-				}*/
-
-			}
-			if(m_position.x + m_radius > rectangles.at(i)->getPosition().x 
-				&& m_position.x + m_radius < rectangles.at(i)->getPosition().x + rectangles.at(i)->getSize().x
-				&& m_position.y < rectangles.at(i)->getPosition().y + rectangles.at(i)->getSize().y
-				&& m_position.y >  rectangles.at(i)->getPosition().y){
-
-					if(m_actualvelocity.x > 0.9)  std::cout<< m_actualvelocity.x << "   FATAL COLLISION" << std::endl;
-					m_position.x = rectangles.at(i)->getPosition().x - m_radius;
-					m_body.setPosition(m_position);
-					m_actualvelocity.x = m_previousposition.x - m_position.x;
-					m_velocity.x = -m_actualvelocity.x;
-					xcollision = true;
-
-			}
-			if(m_position.x - m_radius > rectangles.at(i)->getPosition().x 
-				&& m_position.x - m_radius < rectangles.at(i)->getPosition().x + rectangles.at(i)->getSize().x
-				&& m_position.y < rectangles.at(i)->getPosition().y + rectangles.at(i)->getSize().y
-				&& m_position.y >  rectangles.at(i)->getPosition().y){
-
-					if(m_actualvelocity.x < -0.9)  std::cout<< m_actualvelocity.x << "   FATAL COLLISION" << std::endl;
-					m_position.x = rectangles.at(i)->getPosition().x + rectangles.at(i)->getSize().x + m_radius;
-					m_body.setPosition(m_position);
-					m_actualvelocity.x = 0;
-					m_velocity.x = 0;
-					xcollision = true;
-
-			}
-			if(m_position.y + m_radius > rectangles.at(i)->getPosition().y 
-				&& m_position.y + m_radius < rectangles.at(i)->getPosition().y + rectangles.at(i)->getSize().y
-				&& m_position.x < rectangles.at(i)->getPosition().x + rectangles.at(i)->getSize().x
-				&& m_position.x >  rectangles.at(i)->getPosition().x){
-
-					if(m_actualvelocity.y > 0.9)  std::cout<< m_actualvelocity.y << "   FATAL COLLISION" << std::endl;
-					m_position.y = rectangles.at(i)->getPosition().y - m_radius;
-					m_body.setPosition(m_position);
-					m_actualvelocity.y = 0;
-					m_velocity.y = 0;
-					ycollision = true;
-
-			}
-			if(m_position.y - m_radius > rectangles.at(i)->getPosition().y 
-				&& m_position.y - m_radius < rectangles.at(i)->getPosition().y + rectangles.at(i)->getSize().y
-				&& m_position.x < rectangles.at(i)->getPosition().x + rectangles.at(i)->getSize().x
-				&& m_position.x >  rectangles.at(i)->getPosition().x){
-
-					if(m_actualvelocity.y < -0.9)  std::cout<< m_actualvelocity.y << "   FATAL COLLISION" << std::endl;
-					m_position.y = rectangles.at(i)->getPosition().y + rectangles.at(i)->getSize().y + m_radius;
-					m_body.setPosition(m_position);
-					m_actualvelocity.y = 0;
-					m_velocity.y = 0;
-					ycollision = true;
-			}
-			if(!ycollision && !xcollision)
+			/*float deltaY = rectangles.at(i)->getPoint(j).y - rectangles.at(i)->getPoint(j+1).y;
+			float deltaX = rectangles.at(i)->getPoint(j).x - rectangles.at(i)->getPoint(j+1).x;
+			if(deltaX == 0 || deltaY == 0)
 			{
-				m_actualvelocity = m_velocity;
-			}
-			else if(xcollision)
+			if(rectangles.at(i)->getGlobalBounds().intersects(m_body.getGlobalBounds()))
 			{
-				m_actualvelocity.x = m_previousposition.x - m_position.x;
-			}
-			else if(ycollision)
+			if(m_position.x < rectangles.at(i)->getPosition().x)
 			{
-				m_actualvelocity.y = m_previousposition.y - m_position.y;
+			float overlapX = rectangles.at(i)->getPosition().x - m_position.x;
 			}
+			}
+			}
+			else
+			{
+			float k = deltaY/deltaX;
+			float m = rectangles.at(i)->getPoint(j).y - k*rectangles.at(i)->getPoint(j).x;
+			line[j] = sf::Vector2f(k ,m);
+			}*/
+
+		}
+		if(m_position.x + m_radius > rectangles.at(i)->GetWall().getPosition().x 
+			&& m_position.x + m_radius < rectangles.at(i)->GetWall().getPosition().x + rectangles.at(i)->GetWall().getSize().x
+			&& m_position.y < rectangles.at(i)->GetWall().getPosition().y + rectangles.at(i)->GetWall().getSize().y
+			&& m_position.y >  rectangles.at(i)->GetWall().getPosition().y){
+
+				m_position.x = rectangles.at(i)->GetWall().getPosition().x - m_radius;
+				m_body.setPosition(m_position);
+
+		}
+		if(m_position.x - m_radius > rectangles.at(i)->GetWall().getPosition().x 
+			&& m_position.x - m_radius < rectangles.at(i)->GetWall().getPosition().x + rectangles.at(i)->GetWall().getSize().x
+			&& m_position.y < rectangles.at(i)->GetWall().getPosition().y + rectangles.at(i)->GetWall().getSize().y
+			&& m_position.y >  rectangles.at(i)->GetWall().getPosition().y){
+
+				m_position.x = rectangles.at(i)->GetWall().getPosition().x + rectangles.at(i)->GetWall().getSize().x + m_radius;
+				m_body.setPosition(m_position);
+
+		}
+		if(m_position.y + m_radius > rectangles.at(i)->GetWall().getPosition().y 
+			&& m_position.y + m_radius < rectangles.at(i)->GetWall().getPosition().y + rectangles.at(i)->GetWall().getSize().y
+			&& m_position.x < rectangles.at(i)->GetWall().getPosition().x + rectangles.at(i)->GetWall().getSize().x
+			&& m_position.x >  rectangles.at(i)->GetWall().getPosition().x){
+
+				m_position.y = rectangles.at(i)->GetWall().getPosition().y - m_radius;
+				m_body.setPosition(m_position);
+
+		}
+		if(m_position.y - m_radius > rectangles.at(i)->GetWall().getPosition().y 
+			&& m_position.y - m_radius < rectangles.at(i)->GetWall().getPosition().y + rectangles.at(i)->GetWall().getSize().y
+			&& m_position.x < rectangles.at(i)->GetWall().getPosition().x + rectangles.at(i)->GetWall().getSize().x
+			&& m_position.x >  rectangles.at(i)->GetWall().getPosition().x){
+
+				m_position.y = rectangles.at(i)->GetWall().getPosition().y + rectangles.at(i)->GetWall().getSize().y + m_radius;
+				m_body.setPosition(m_position);
+
 		}
 
 	}
@@ -314,7 +278,7 @@ void PlayerObject::Attack()
 {
 	/*if(m_weapon->Load(bool loading))
 	{
-	
+
 	}*/
 };
 

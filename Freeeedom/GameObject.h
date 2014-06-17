@@ -1,4 +1,6 @@
 #pragma once
+
+class Wall;
 class GameObject
 {
 public:
@@ -7,7 +9,7 @@ public:
 
 	virtual bool Initialize() = 0;
 	virtual void Update(float deltatime) = 0;
-	virtual void WallCollision(std::vector<sf::RectangleShape*> rectangles) = 0;
+	virtual void WallCollision(std::vector<Wall*> rectangles) = 0;
 	virtual void Hit(std::vector<sf::CircleShape*> circles) = 0;
 
 	bool GetExistance();

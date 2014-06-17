@@ -10,6 +10,9 @@ public:
 	void Update(PlayerObject* p_player);
 	void Draw(sf::RenderWindow* p_renderer);
 	void DrawShadows(sf::RenderWindow* p_renderer);
+
+	sf::RectangleShape GetWall();
+
 private:
 
 	sf::RectangleShape m_wall;

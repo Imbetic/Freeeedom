@@ -22,6 +22,8 @@ public:
 	sf::RenderWindow* m_window;
 	InputManager* m_inputmngr;
 
+	sf::Clock m_clock;
+
 	sf::View* m_view;
 };
 

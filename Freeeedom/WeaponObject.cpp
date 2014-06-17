@@ -2,6 +2,7 @@
 #include "WeaponObject.h"
 #include "PlayerObject.h"
 #include "InputManager.h"
+#include "Wall.h"
 
 
 WeaponObject::WeaponObject(PlayerObject* player, InputManager* input)
@@ -63,7 +64,7 @@ void WeaponObject::Update(float deltatime)
 	}
 };
 
-void WeaponObject::WallCollision(std::vector<sf::RectangleShape*> rectangles)
+void WeaponObject::WallCollision(std::vector<Wall*> rectangles)
 {
 
 };

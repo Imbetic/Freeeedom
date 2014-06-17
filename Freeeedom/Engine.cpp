@@ -25,6 +25,7 @@ bool Engine::Initialize()
 	m_window->setMouseCursorVisible(false);
 	m_statemanager.Attach(new GameState(this));
 	m_statemanager.SetState("GameState");
+	m_deltatime = 0;
 	return true;
 }
 
@@ -38,7 +39,7 @@ void Engine::Run()
 			m_inputmngr->UpdateEvents(event);
 		}
 		UpdateDeltatime();
-		m_statemanager.Update(0.01f);
+		m_statemanager.Update(m_deltatime);
 		m_window->clear();
 		m_statemanager.Draw();
 		m_window->display();
@@ -64,5 +65,6 @@ void Engine::Cleanup()
 
 void Engine::UpdateDeltatime()
 {
-
+	m_deltatime = m_clock.getElapsedTime().asSeconds();
+	m_clock.restart();
 };

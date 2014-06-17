@@ -4,6 +4,7 @@
 
 class InputManager;
 class WeaponObject;
+class Wall;
 
 struct Weapon
 {
@@ -21,7 +22,7 @@ public:
 
 	bool Initialize();
 	void Update(float deltatime);
-	void WallCollision(std::vector<sf::RectangleShape*> rectangles);
+	void WallCollision(std::vector<Wall*> rectangles);
 	void Draw();
 	void Hit(std::vector<sf::CircleShape*> circles);
 	void Attack();
