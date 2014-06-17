@@ -17,11 +17,11 @@ GameObjectManager::~GameObjectManager(void)
 
 bool GameObjectManager::Initialize()
 {
-	m_walls.push_back(new Wall(sf::Vector2f(0,0), sf::Vector2f(500,50)));
-	m_walls.push_back(new Wall(sf::Vector2f(600,0), sf::Vector2f(50,500)));
-	m_walls.push_back(new Wall(sf::Vector2f(500,500), sf::Vector2f(100,200)));
-	m_walls.push_back(new Wall(sf::Vector2f(600,600), sf::Vector2f(100,200)));
-	//m_walls.push_back(new Wall(sf::Vector2f(600,800), sf::Vector2f(200,100)));
+	m_walls.push_back(new Wall(sf::Vector2f(0,0), sf::Vector2f(600/2,50/2)));
+	m_walls.push_back(new Wall(sf::Vector2f(600/2,0), sf::Vector2f(50/2,500/2)));
+	m_walls.push_back(new Wall(sf::Vector2f(0,50/2), sf::Vector2f(50/2,700/2)));
+	m_walls.push_back(new Wall(sf::Vector2f(600/2,600/2), sf::Vector2f(50/2,200/2)));
+	m_walls.push_back(new Wall(sf::Vector2f(0/2,750/2), sf::Vector2f(600/2,50/2)));
 
 	m_player = new PlayerObject(m_engine->m_inputmngr, m_engine->m_window);
 	m_player->Initialize();

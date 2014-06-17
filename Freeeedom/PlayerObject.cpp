@@ -16,7 +16,7 @@ bool PlayerObject::Initialize()
 	m_acceleration = 1500;
 	m_friction = 10;
 	m_radius = 25;
-	m_position = sf::Vector2f(0, 100);
+	m_position = sf::Vector2f(100, 100);
 	m_previousposition = m_position;
 	m_body.setPosition(m_position);
 	m_body.setRadius(m_radius);
@@ -36,6 +36,7 @@ bool PlayerObject::Initialize()
 };
 void PlayerObject::Update(float deltatime)
 {
+	std::cout << deltatime << std::endl;
 	m_deltamouse = 0;
 	m_previousposition = m_position;
 
