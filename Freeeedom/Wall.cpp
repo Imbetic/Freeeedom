@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Wall.h"
-#include "PlayerObject.h"
+#include "GameObject.h"
 
 
 Wall::Wall(sf::Vector2f p_position, sf::Vector2f p_size)
@@ -18,7 +18,7 @@ Wall::Wall(sf::Vector2f p_position, sf::Vector2f p_size)
 	}
 }
 
-void Wall::Update(PlayerObject* p_player)
+void Wall::Update(GameObject* p_player)
 {
 	//If this object is´inside the screen
 	{

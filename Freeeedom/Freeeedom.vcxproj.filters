@@ -25,6 +25,9 @@
     <Filter Include="GameObjectManager">
       <UniqueIdentifier>{25dfff53-a730-458c-a315-a44812ea3d36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Humanoid">
+      <UniqueIdentifier>{c52d5035-712d-4d19-ae53-08208eec00c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -57,8 +60,12 @@
       <Filter>GameObjectManager</Filter>
     </ClCompile>
     <ClCompile Include="PlayerObject.cpp" />
-    <ClCompile Include="WeaponObject.cpp" />
     <ClCompile Include="Wall.cpp" />
+    <ClCompile Include="Humanoid.cpp">
+      <Filter>Humanoid</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerControls.cpp" />
+    <ClCompile Include="Brain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -93,8 +100,12 @@
       <Filter>GameObjectManager</Filter>
     </ClInclude>
     <ClInclude Include="PlayerObject.h" />
-    <ClInclude Include="WeaponObject.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Wall.h" />
+    <ClInclude Include="Humanoid.h">
+      <Filter>Humanoid</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerControls.h" />
+    <ClInclude Include="Brain.h" />
   </ItemGroup>
 </Project>

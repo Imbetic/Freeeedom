@@ -85,15 +85,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedSprite.h" />
+    <ClInclude Include="Brain.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="Humanoid.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Konstrukten.h" />
+    <ClInclude Include="PlayerControls.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Wall.h" />
-    <ClInclude Include="WeaponObject.h" />
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="SpriteManager.h" />
     <ClInclude Include="State.h" />
@@ -102,15 +104,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedSprite.cpp" />
+    <ClCompile Include="Brain.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="Humanoid.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Konstrukten.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlayerControls.cpp" />
     <ClCompile Include="Wall.cpp" />
-    <ClCompile Include="WeaponObject.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
     <ClCompile Include="SpriteManager.cpp" />
     <ClCompile Include="StateManager.cpp" />

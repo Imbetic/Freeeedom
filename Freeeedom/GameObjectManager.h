@@ -3,7 +3,7 @@
 class Engine;
 class GameObject;
 class Wall;
-class PlayerObject;
+class Humanoid;
 
 class GameObjectManager
 {
@@ -19,7 +19,7 @@ public:
 private:
 	Engine* m_engine;
 	std::vector<GameObject*> m_gameobjects;
-	PlayerObject* m_player;
+	Humanoid* m_player;
 
 	bool m_cleared;
 	std::vector<Wall*> m_walls;
