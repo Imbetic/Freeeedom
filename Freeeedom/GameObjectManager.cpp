@@ -32,13 +32,12 @@ bool GameObjectManager::Initialize()
 void GameObjectManager::Update(float deltatime)
 {
 	m_player->Update(deltatime);
+	m_player->WallCollision(m_walls);
 
 	m_engine->m_view->setCenter(m_player->GetPosition());
 	m_engine->m_view->setRotation(m_player->GetRotation() - 90);
 	m_engine->m_view->setCenter(m_player->GetCameraAnchor());
 	m_engine->m_window->setView(*m_engine->m_view);
-
-	m_player->WallCollision(m_walls);
 
 	for(int i = 0; i<m_walls.size(); i++)
 	{
