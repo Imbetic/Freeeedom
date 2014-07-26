@@ -93,6 +93,7 @@
     <ClInclude Include="Humanoid.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Konstrukten.h" />
+    <ClInclude Include="MeleeWeapon.h" />
     <ClInclude Include="PlayerControls.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Wall.h" />
@@ -113,6 +114,7 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Konstrukten.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MeleeWeapon.cpp" />
     <ClCompile Include="PlayerControls.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="PlayerObject.cpp" />

@@ -28,6 +28,15 @@
     <Filter Include="Humanoid">
       <UniqueIdentifier>{c52d5035-712d-4d19-ae53-08208eec00c4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{817298fa-06be-4445-bc66-f4d56c663572}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Walls">
+      <UniqueIdentifier>{89988c45-b44c-4883-85d6-9ab3141bc103}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Weapon">
+      <UniqueIdentifier>{0463c39e-bef7-446b-abd1-fa2d2477d5cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -59,13 +68,22 @@
     <ClCompile Include="GameObjectManager.cpp">
       <Filter>GameObjectManager</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerObject.cpp" />
-    <ClCompile Include="Wall.cpp" />
     <ClCompile Include="Humanoid.cpp">
       <Filter>Humanoid</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerControls.cpp" />
-    <ClCompile Include="Brain.cpp" />
+    <ClCompile Include="PlayerControls.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObject.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Brain.cpp">
+      <Filter>Humanoid</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>Walls</Filter>
+    </ClCompile>
+    <ClCompile Include="MeleeWeapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -99,13 +117,22 @@
     <ClInclude Include="GameObjectManager.h">
       <Filter>GameObjectManager</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="Types.h" />
-    <ClInclude Include="Wall.h" />
     <ClInclude Include="Humanoid.h">
       <Filter>Humanoid</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerControls.h" />
-    <ClInclude Include="Brain.h" />
+    <ClInclude Include="PlayerControls.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Brain.h">
+      <Filter>Humanoid</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObject.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>Walls</Filter>
+    </ClInclude>
+    <ClInclude Include="MeleeWeapon.h" />
   </ItemGroup>
 </Project>

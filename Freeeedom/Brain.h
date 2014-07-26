@@ -7,6 +7,7 @@ public:
 	virtual void Update() = 0;
 	bool GetMovement(int number);
 	bool GetRun();
+	bool GetLoadAttack();
 	float GetRotationAmount();
 
 	~Brain(void);

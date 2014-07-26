@@ -50,6 +50,7 @@ void GameObjectManager::Update(float deltatime)
 
 void GameObjectManager::Draw()
 {
+	m_player->Draw(m_engine->m_window);
 	for(int i = 0; i<m_walls.size(); i++)
 	{
 		m_walls.at(i)->DrawShadows(m_engine->m_window);
@@ -59,7 +60,7 @@ void GameObjectManager::Draw()
 		m_walls.at(i)->Draw(m_engine->m_window);
 	}
 
-	m_player->Draw(m_engine->m_window);
+	
 	
 };
 

@@ -28,6 +28,7 @@ protected:
 
 	float m_rotationspeed;
 	float m_rotation;
+	float m_rotationamount;
 
 	sf::Vector2f m_cameraanchor;
 	float m_viewdistance;

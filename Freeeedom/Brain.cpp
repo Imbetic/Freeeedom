@@ -11,6 +11,11 @@ bool Brain::GetMovement(int number)
 	return m_movement[number];
 }
 
+bool Brain::GetLoadAttack()
+{
+	return m_loadattack;		
+}
+
 bool Brain::GetRun()
 {
 	return m_run;
