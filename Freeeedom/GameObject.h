@@ -8,7 +8,7 @@ public:
 	~GameObject(void);
 
 	virtual void Update(float deltatime) = 0;
-	void WallCollision(std::vector<Wall*> rectangles);
+	void WallCollision(std::vector<Wall*>& rectangles);
 	void Draw(sf::RenderWindow* p_window);
 
 	bool GetExistance();

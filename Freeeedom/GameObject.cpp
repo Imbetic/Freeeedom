@@ -12,7 +12,7 @@ GameObject::GameObject(void)
 	m_rotation = 0;
 }
 
-void GameObject::WallCollision(std::vector<Wall*> rectangles)
+void GameObject::WallCollision(std::vector<Wall*>& rectangles)
 {
 	for(int i = 0; i<rectangles.size(); i++)
 	{

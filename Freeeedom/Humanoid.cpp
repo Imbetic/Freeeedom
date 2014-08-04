@@ -5,12 +5,12 @@
 
 Humanoid::Humanoid(Brain* p_brain)
 {
-	m_meleeweapon = new MeleeWeapon(30, 10, 10);
+	m_meleeweapon = new MeleeWeapon(50, 10, 10);
 	m_brain = p_brain;
-	m_brain->Update();
+	//m_brain->Update();
 	m_acceleration = 1500;
 	m_friction = 10;
-	m_radius = 25;
+	m_radius = 32;
 	m_position = sf::Vector2f(100, 100);
 	m_body.setPosition(m_position);
 	m_body.setRadius(m_radius);
@@ -36,7 +36,7 @@ Humanoid::Humanoid(Brain* p_brain)
 	m_hand.setOrigin(m_radius/3, m_radius/3);
 	m_hand.setFillColor(sf::Color::Black);
 
-	m_relativehandposition = sf::Vector2f(35*cos(1), 35*sin(1));
+	m_relativehandposition = sf::Vector2f(30*cos(1), 30*sin(1));
 
 
 }
@@ -49,15 +49,13 @@ void Humanoid::Update(float deltatime)
 	Movement(deltatime);
 
 	PreUpdateHand();
-	
-	std::cout << m_armangle << std::endl;
 
 	if(m_releaseswing) ReleaseAttack();
-	
+
 	if(m_swingingleft || m_swingingright) Swinging(deltatime);
 	else if(m_loadleft || m_loadright) LoadAttack(deltatime);
 	else IdleHand(deltatime);
-	
+
 	PostUpdateHand(deltatime);
 
 	m_meleeweapon->Update((m_armangle*2)+m_rotation+90, m_hand.getPosition());
@@ -91,12 +89,14 @@ void Humanoid::PostUpdateHand(float deltatime)
 		m_swingspeed = 0;
 		m_relativehandposition.x = 35*cos(3.141592654f*(m_body.getRotation()+90.1)/180);
 		m_relativehandposition.y = 35*sin(3.141592654f*(m_body.getRotation()+90.1)/180);
+		m_armangle = 90.1;
 	}
 	if(m_armangle > 270)
 	{
 		m_swingspeed = 0;
 		m_relativehandposition.x = 35*cos(3.141592654f*(m_body.getRotation()-90.1)/180);
 		m_relativehandposition.y = 35*sin(3.141592654f*(m_body.getRotation()-90.1)/180);
+		m_armangle = 269.9;
 	}
 
 	m_swingvelocity = sf::Vector2f(m_swingspeed * -sin(m_hand.getRotation()*3.141592654f/180), m_swingspeed * cos(m_hand.getRotation()*3.141592654f/180));
@@ -111,10 +111,10 @@ void Humanoid::PostUpdateHand(float deltatime)
 	}
 	//The hand cannot leave the invisible arm!
 	float distance = sqrt((m_relativehandposition.x * m_relativehandposition.x) + (m_relativehandposition.y * m_relativehandposition.y));
-
-	if(distance > 35)
+	if(distance == 0) distance = 0.001;
+	if(distance > 30)
 	{
-		float offset = distance - 35;
+		float offset = distance - 30;
 		m_relativehandposition.x -= offset*(m_relativehandposition.x)/distance;
 		m_relativehandposition.y -= offset*(m_relativehandposition.y)/distance;
 	}
@@ -125,8 +125,17 @@ void Humanoid::PostUpdateHand(float deltatime)
 
 void Humanoid::CheckStartLoading()
 {
-	if(m_brain->GetLoadAttack() && m_rotationamount <= 0) m_loadleft = true;
-	else if(m_brain->GetLoadAttack() && m_rotationamount > 0) m_loadright = true;
+	if(m_brain->GetLoadAttack() && m_rotationamount <= 0)
+	{
+		m_existance = false;
+		m_loadleft = true;
+		if(!m_swingingleft && !m_swingingright) m_swingspeed = 0;
+	}
+	else if(m_brain->GetLoadAttack() && m_rotationamount > 0)
+	{
+		m_loadright = true;
+		if(!m_swingingleft && !m_swingingright) m_swingspeed = 0;
+	}
 };
 
 void Humanoid::IdleHand(float deltatime)
@@ -279,11 +288,11 @@ void Humanoid::LoadAttack(float deltatime)
 {
 	if(m_loadleft)
 	{
-		m_swingspeed -= m_strength * deltatime/m_meleeweapon->GetWeight();
+		m_swingspeed -= 2* m_strength * deltatime/m_meleeweapon->GetWeight();
 	}
 	else if (m_loadright)
 	{
-		m_swingspeed += m_strength * deltatime/m_meleeweapon->GetWeight();
+		m_swingspeed += 2* m_strength * deltatime/m_meleeweapon->GetWeight();
 	}
 	if(!m_brain->GetLoadAttack())
 	{
@@ -332,6 +341,8 @@ void Humanoid::Draw(sf::RenderWindow* p_window)
 
 Humanoid::~Humanoid(void)
 {
+	delete m_brain;
+	m_brain = nullptr;
 	delete m_meleeweapon;
 	m_meleeweapon = nullptr;
 }

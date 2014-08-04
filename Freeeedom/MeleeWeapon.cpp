@@ -4,8 +4,8 @@
 
 MeleeWeapon::MeleeWeapon(float p_handlelength, float p_bodysize, float p_weight)
 {
-	m_handle.setSize(sf::Vector2f(10, p_handlelength));
-	m_handle.setOrigin(5, 0);
+	m_handle.setSize(sf::Vector2f(6, p_handlelength));
+	m_handle.setOrigin(3, 0);
 	m_handle.setFillColor(sf::Color::Black);
 	m_body.setFillColor(sf::Color::Black);
 	m_body.setRadius(p_bodysize);

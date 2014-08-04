@@ -20,7 +20,7 @@ Wall::Wall(sf::Vector2f p_position, sf::Vector2f p_size)
 
 void Wall::Update(GameObject* p_player)
 {
-	//If this object is´inside the screen
+	//If this object is inside the screen
 	{
 		float dY = p_player->GetPosition().y - m_wall.getPosition().y;
 		float dX = p_player->GetPosition().x - m_wall.getPosition().x;

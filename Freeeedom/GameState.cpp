@@ -13,11 +13,15 @@ GameState::GameState(Engine* engine)
 
 GameState::~GameState(void)
 {
+	m_gom->Clear();
+	delete m_gom;
+	m_gom = nullptr;
 	m_engine = nullptr;
 }
 
 bool GameState::EnterState()
 {
+	m_engine->m_statemanager.SetNextState("GameState");
 	m_gom->Initialize();
 	return true;
 };
@@ -36,7 +40,7 @@ void GameState::Draw(){
 };
 
 void GameState::ExitState(){
-
+	m_gom->Clear();
 };
 
 bool GameState::IsType(const std::string &p_sType){

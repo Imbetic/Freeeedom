@@ -84,6 +84,13 @@
       <Filter>Walls</Filter>
     </ClCompile>
     <ClCompile Include="MeleeWeapon.cpp" />
+    <ClCompile Include="Sky.cpp" />
+    <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="Fence.cpp" />
+    <ClCompile Include="Solid.cpp" />
+    <ClCompile Include="GameOverState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -134,5 +141,12 @@
       <Filter>Walls</Filter>
     </ClInclude>
     <ClInclude Include="MeleeWeapon.h" />
+    <ClInclude Include="Sky.h" />
+    <ClInclude Include="Ground.h" />
+    <ClInclude Include="Fence.h" />
+    <ClInclude Include="Solid.h" />
+    <ClInclude Include="GameOverState.h">
+      <Filter>States</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

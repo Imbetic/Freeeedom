@@ -9,6 +9,10 @@ PlayerControls::PlayerControls(InputManager* p_input, sf::RenderWindow* p_window
 	m_input = p_input;
 	m_rotationamount = 0;
 	m_loadattack = false;
+
+	m_rotationamount = sf::Mouse::getPosition(*m_window).x - m_previousmouspos;
+	sf::Mouse::setPosition(sf::Vector2i(1280/2, 720/2), *m_window);
+	m_previousmouspos = sf::Mouse::getPosition(*m_window).x;
 }
 
 void PlayerControls::Update()

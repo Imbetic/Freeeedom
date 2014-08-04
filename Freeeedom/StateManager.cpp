@@ -30,6 +30,11 @@ string StateManager::CurrentState()
 	return m_pCurrentState->GetCurrentState();
 }
 
+string StateManager::NextState()
+{
+	return m_NextState;
+}
+
 void StateManager::Attach(State *p_pState)
 {
 	m_aStates.push_back(p_pState);
@@ -64,6 +69,11 @@ void StateManager::SetState(const string &p_sType)
 			return;
 		}
 	}
+}
+
+void StateManager::SetNextState(const string &p_sType)
+{
+	m_NextState = p_sType;
 }
 
 bool StateManager::IsRunning()

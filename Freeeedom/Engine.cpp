@@ -2,6 +2,7 @@
 #include "InputManager.h"
 #include "State.h"
 #include "GameState.h"
+#include "GameOverState.h"
 
 
 Engine::Engine(void)
@@ -21,9 +22,11 @@ bool Engine::Initialize()
 	m_view->setSize(sf::Vector2f(1280, 720));
 	m_inputmngr = new InputManager;
 	m_window = new sf::RenderWindow(sf::VideoMode(1280, 720), "The SHIT");
+	m_window->setFramerateLimit(60);
 	m_window->setView(*m_view);
 	m_window->setMouseCursorVisible(false);
 	m_statemanager.Attach(new GameState(this));
+	m_statemanager.Attach(new GameOverState(this));
 	m_statemanager.SetState("GameState");
 	m_deltatime = 0;
 	return true;
@@ -34,7 +37,7 @@ void Engine::Run()
 	while(m_running)
 	{
 		sf::Event event;
-		if(m_window->pollEvent(event))
+		while(m_window->pollEvent(event))
 		{
 			m_inputmngr->UpdateEvents(event);
 		}
@@ -43,6 +46,11 @@ void Engine::Run()
 		m_window->clear();
 		m_statemanager.Draw();
 		m_window->display();
+		if(m_statemanager.NextState() != m_statemanager.CurrentState())
+		{
+			m_statemanager.GetCurrentState()->ExitState();
+			m_statemanager.SetState(m_statemanager.NextState());
+		}
 	}
 };
 
