@@ -1,14 +1,11 @@
 #pragma once
 #include "State.h"
-
-class Engine;
-
-class GameOverState :
+class StartMenu :
 	public State
 {
 public:
-	GameOverState(Engine* engine);
-	~GameOverState(void);
+	StartMenu(Engine* p_engine);
+	~StartMenu(void);
 	/* Called upon entering state */
 	bool EnterState();
 	/* Called when changing state and old state exits */

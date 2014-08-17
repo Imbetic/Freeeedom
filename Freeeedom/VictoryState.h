@@ -1,14 +1,11 @@
 #pragma once
 #include "State.h"
-
-class Engine;
-
-class GameOverState :
+class VictoryState :
 	public State
 {
 public:
-	GameOverState(Engine* engine);
-	~GameOverState(void);
+	VictoryState(Engine* engine);
+	~VictoryState(void);
 	/* Called upon entering state */
 	bool EnterState();
 	/* Called when changing state and old state exits */
@@ -24,6 +21,7 @@ public:
 	std::string GetCurrentState();
 private:
 	Engine* m_engine;
+
 	sf::Sprite m_text;
 	sf::Texture m_texttexture;
 };

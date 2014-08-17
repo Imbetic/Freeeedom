@@ -32,7 +32,6 @@ void InputManager::UpdateEvents(sf::Event event)
 	{
 		int index = event.key.code;
 		m_Current[index]  = false;
-		//std::cout << "released\n";
 	}
 	else if (event.type == sf::Event::MouseButtonPressed)
 	{
@@ -43,7 +42,6 @@ void InputManager::UpdateEvents(sf::Event event)
 	{
 		int index = event.key.code;
 		m_current[index] = false;
-		//std::cout << "released\n";
 	}
 }
 

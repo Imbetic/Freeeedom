@@ -11,13 +11,13 @@ Humanoid::Humanoid(Brain* p_brain)
 	m_acceleration = 1500;
 	m_friction = 10;
 	m_radius = 32;
-	m_position = sf::Vector2f(100, 100);
+	m_position = sf::Vector2f(72*32, 70*32);
 	m_body.setPosition(m_position);
 	m_body.setRadius(m_radius);
 	m_body.setOrigin(m_radius, m_radius);
 	m_body.setFillColor(sf::Color::Black);
 	m_rotationspeed = 12;
-	m_strength = 1000;
+	m_strength = 2000;
 
 	m_rotation = 0;
 	m_body.setRotation(m_rotation);
@@ -127,7 +127,6 @@ void Humanoid::CheckStartLoading()
 {
 	if(m_brain->GetLoadAttack() && m_rotationamount <= 0)
 	{
-		m_existance = false;
 		m_loadleft = true;
 		if(!m_swingingleft && !m_swingingright) m_swingspeed = 0;
 	}
@@ -331,12 +330,30 @@ void Humanoid::Swinging(float deltatime)
 	};
 }
 
-void Humanoid::Draw(sf::RenderWindow* p_window)
+void Humanoid::ZombieCollision(sf::CircleShape p_zombiebody)
 {
-	p_window->draw(m_body);
-	p_window->draw(m_hand);
-	p_window->draw(m_meleeweapon->GetBody());
-	p_window->draw(m_meleeweapon->GetHandle());
+	float dX = p_zombiebody.getPosition().x - m_position.x;
+	float dY = p_zombiebody.getPosition().y - m_position.y;
+	float dist = sqrtf((dX*dX)+(dY*dY));
+	if(dist < 64) m_existance = false;
+}
+
+bool Humanoid::SwingCheck()
+{
+	if(m_swingingleft || m_swingingright) return true; else return false;
+}
+
+sf::CircleShape Humanoid::GetWeaponHead()
+{
+	return m_meleeweapon->GetBody();
+}
+
+void Humanoid::Draw(sf::RenderWindow& p_window)
+{
+	p_window.draw(m_body);
+	p_window.draw(m_hand);
+	p_window.draw(m_meleeweapon->GetBody());
+	p_window.draw(m_meleeweapon->GetHandle());
 }
 
 Humanoid::~Humanoid(void)

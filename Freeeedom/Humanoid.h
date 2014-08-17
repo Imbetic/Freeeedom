@@ -18,8 +18,13 @@ public:
 	void LoadAttack(float deltatime);
 	void ReleaseAttack();
 	void Swinging(float deltatime);
-	void Draw(sf::RenderWindow* p_window);
+	void Draw(sf::RenderWindow& p_window);
 	void CheckStartLoading();
+	void ZombieCollision(sf::CircleShape p_zombiebody);
+
+	bool SwingCheck();
+	sf::CircleShape GetWeaponHead();
+
 	~Humanoid(void);
 
 private:

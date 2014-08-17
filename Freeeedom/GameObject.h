@@ -1,6 +1,7 @@
 #pragma once
 
-class Wall;
+class Solid;
+class Ground;
 class GameObject
 {
 public:
@@ -8,8 +9,10 @@ public:
 	~GameObject(void);
 
 	virtual void Update(float deltatime) = 0;
-	void WallCollision(std::vector<Wall*>& rectangles);
-	void Draw(sf::RenderWindow* p_window);
+	void WallCollision(std::vector<Solid*>& p_walls);
+	void GroundCollision(std::vector<Ground*>& p_grounds);
+	void Draw(sf::RenderWindow& p_window);
+	sf::CircleShape GetBody();
 
 	bool GetExistance();
 	float GetRotation();
@@ -36,7 +39,7 @@ protected:
 	float m_weight;
 	float m_friction;
 
-	sf::RenderWindow* m_window;
+	bool m_onground;
 
 };
 
